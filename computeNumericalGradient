@@ -6,7 +6,6 @@ function numgrad = computeNumericalGradient(J, theta)
   
 % Initialize numgrad with zeros
 numgrad = zeros(size(theta));
-
 %% ---------- YOUR CODE HERE --------------------------------------
 % Instructions: 
 % Implement numerical gradient checking, and return the result in numgrad.  
@@ -18,12 +17,10 @@ numgrad = zeros(size(theta));
 %                
 % Hint: You will probably want to compute the elements of numgrad one at a time. 
 
-
-
-
-
-
-
+EPSILON = 0.0001 * eye(size(theta,1));
+for iter = 1:size(theta,1)
+    numgrad(iter) = (J(theta + EPSILON(:,iter)) - J(theta - EPSILON(:,iter)))/ 0.0002;
+end
 
 %% ---------------------------------------------------------------
 end

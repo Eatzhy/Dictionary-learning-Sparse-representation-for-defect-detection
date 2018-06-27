@@ -1,0 +1,21 @@
+function tr_patches = sample_images(images, patchsize, numpatches)
+%对训练数据样本无重叠采样
+%tr_images 为样本数据，一张无缺陷的图片
+%patchsize 为采样的大小，设置为16x16
+%numpatches 为采样的数量
+%稀疏编码不需要对采集样本做标准化，稀疏自编码需要，在此不写normalize函数
+tr_patches = zeros(patchsize*patchsize, numpatches);
+images = rgb2gray(images);
+tic
+image_size = size(images);
+%i = randi(image_size(1) - patchsize + 1,1,numpatches);
+%j = randi(image_size(2) - patchsize + 1,1,numpatches);
+num = 1;
+for row_num = 1:patchsize
+    for col_num = 1:patchsize
+        tr_patches(:,num) = reshape(images(col_num:col_num + patchsize - 1,row_num:row_num + patchsize - 1),1,patchsize * patchsize);
+        num = num + 1;
+    end
+end
+toc
+end
